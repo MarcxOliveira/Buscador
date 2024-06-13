@@ -18,7 +18,8 @@ function App() {
 
     try{
       const response = await api.get(`${input}/json`);
-      console.log(response.data)
+      setCep(response.data)
+      setInput("");
 
     }catch{
       alert("Ops erro ao buscar");
@@ -45,14 +46,18 @@ function App() {
         </button>
       </div>
 
-      <main className='main'>
-        <h2>CEP: 79003222</h2>
 
-        <span>Rua Teste</span>
-        <span>Complemento: teste</span>
-        <span>Vila Rosa</span>
-        <span>São Paulo - SP</span>
-      </main>
+      {Object.keys(cep).length > 0 && (
+        <main className="main">
+          <h2>CEP: {cep.cep}</h2>
+
+          <span>{cep.logradouro}</span>
+          <span>Complemento: {cep.complemento}</span>
+          <span>{cep.bairro}</span>
+          <span>{cep.localidade} - {cep.uf}</span>
+
+        </main>
+      )}
 
     </div>
   );
